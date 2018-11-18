@@ -35,6 +35,11 @@ function LinkedList() {
         return curr.value;
     };
 
+    this.getTail = function (){
+        if (this.tail) return this.tail.value;
+        return undefined;
+    };
+
     this.search = function(success){
         let curr = this.head;
         let result = [];
