@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+            integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./index.css"/>
+  </head>
+  <body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./client.js"></script>
+    <div class="row">
+      <div class="col-md-3 jumbotron" id="active-users-panel">
+        <h3 class="text-center">Active Users<i class="fa fa-users"></i></h3>
+        <ul class="list-group" id="active-users"></ul>
+      </div>
+      <div id="empty" class="col-md-1"></div>
+      <div class="col-md-6">
+        <form id="formJoin" class="form-group">
+          <div class="whitespace"></div>
+          <div class="col-md-6">
+            <input type="text" class="form-control input-lg" placeholder="Nickname:" id="input-name"/>
+            <input type="checkbox" name="form-control input-lg" id="isDriver" value="Driver">  Driver<br>
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block" id="submit">
+              Join
+            </button>
+          </div>
+        </form>
+        <div id='map'></div>
+      </div>
+    </div>
+  </body>
+</html>
