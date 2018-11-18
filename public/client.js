@@ -3,7 +3,7 @@ var name = "";
 var socketId = "";
 var isDriver = false;
 var users = {};
-var map;
+var map, popup;
 var long, lat;
 
 function createMap()
@@ -20,7 +20,13 @@ function createMap()
     },
     trackUserLocation: true,
     showUserLocation: true
-}));
+  }));
+
+  map.addControl(new MapboxDirections({
+    accessToken: mapboxgl.accessToken, unit:'metric',
+    profile:'mapbox/driving', controls:{profileSwitcher:false}}),
+    'top-left').resize();
+  
   return map;
 }
 
@@ -57,6 +63,7 @@ $(function() {
   $('#map').hide();
   $('#active-users-panel').hide();
   map = createMap();
+
   $('#formJoin').submit(function(e) {
     e.preventDefault();
     if($('#input-name').val() != "")
@@ -67,17 +74,22 @@ $(function() {
       $('#active-users-panel').show();
       $('#empty').addClass('jumbotron');
       $('#map').show();
+      map.resize();
       triggerGeolocate();
       getPosition();
     }
+  });
+
+  $(window).resize(function(){
+    map.resize();
   });
 
   function addUser(user)
   {
     console.log("add user called");
     var userTitle = user.isDriver ? "  Driver" : "  Client";
-    $('#active-users').append('<li class="list-group-item">' + user.name
-                              + userTitle +'</li>');
+    $('#active-users').append('<li class="list-group-item">' + user.name +
+            "<div id='title'><b>" + userTitle +'</b></div></li>');
   }
 
   socket.on('updateUsers', function(data) {
@@ -103,11 +115,12 @@ $(function() {
   {
     var marker = new mapboxgl.Marker()
       .setLngLat(driver.position).addTo(map);
-    
+    /*
     var popup = new mapboxgl.Popup({closeButton: false,
                                     closeOnClick: false})
     .setLngLat(driver.position)
     .setHTML('<h6>' + driver.name + '</h6>').addTo(map);
+    */
   }
 
   socket.on('saveSocketId', function(id) {
@@ -119,3 +132,4 @@ $(function() {
     socket.emit('updatePosition', {id:socketId, position:position});
   });
 });
+
