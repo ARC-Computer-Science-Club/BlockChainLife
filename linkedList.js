@@ -1,62 +1,56 @@
-function LinkedList() {
-    this.head = null;
-    this.tail = null;
-    this.length = 0;
-}
 function Node(value, next, prev) {
     this.value = value;
     this.next = next;
     this.prev = prev;
 }
 
-LinkedList.prototype.addToHead = function(value) {
-    const newNode = new Node(value, this.head, null);
-    if (this.head) this.head.prev = newNode;
-    else this.tail = newNode;
-    this.head = newNode;
-    this.length++;
-};
+function LinkedList() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
 
-LinkedList.prototype.addToTail = function(value) {
-    const newNode = new Node(value, null, this.tail);
-    if (this.tail) this.tail.next = newNode;
-    else this.head = newNode;
-    this.tail = newNode;
-    this.length++;
-};
+    this.addToHead = function(value) {
+        const newNode = new Node(value, this.head, null);
+        if (this.head) this.head.prev = newNode;
+        else this.tail = newNode;
+        this.head = newNode;
+        this.length++;
+    };
 
-LinkedList.prototype.at = function (index){
-    let currentNode = this.head;
-    if(this.length < index) throw "RANGE_ERROR";
-    for(var i=0; i < index ; i++){
-        currentNode = currentNode.next;
-    }
-    return currentnode.value;
-};
+    this.addToTail = function(value) {
+        const newNode = new Node(value, null, this.tail);
+        if (this.tail) this.tail.next = newNode;
+        else this.head = newNode;
+        this.tail = newNode;
+        this.length++;
+    };
 
-/*
-  assume searchValueFunction works like this:
+    this.at = function (index){
+        let currentNode = this.head;
+        if(this.length < index) throw "RANGE_ERROR";
+        for(var i=0; i < index ; i++){
+            currentNode = currentNode.next;
+        }
+        return currentnode.value;
+    };
 
-  data.client = "jessica";
-  data.client = "devin";
+    this.search = function(success){
+        let currentNode = this.head;
+        while(currentNode){
+            var temp = success(currentNode.value);
+            if (temp) return temp;
+        }
+        return undefined;
+    };
 
-  function success (data) {
-  if (data.client == "devin") return data.age;
-  }
+}
 
-*/
-
-
-LinkedList.prototype.search = function(success){
-    let currentNode = this.head;
-    while(currentNode){
-        if temp = success(currentNode.value);
-        if (temp) return temp;
-    }
-
-};
 
 const list = new LinkedList();
 list.addToHead(100);
 list.addToHead(200);
+console.log(list.search(alpha => {
+    if (alpha > 50) return "Found";
+    return undefined;
+}));
 console.log(list);
