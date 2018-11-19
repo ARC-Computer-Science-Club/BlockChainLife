@@ -41,3 +41,11 @@ function blockChain(hash=undefined)
         });
     };
 }
+
+var chain = new blockChain("sha384");
+
+chain.addBlock({name: "Devin", age: 21});
+chain.addBlock({name: "Kevin", age: 38});
+chain.addBlock({name: "Devin", age: 21});
+
+chain.printChain();
