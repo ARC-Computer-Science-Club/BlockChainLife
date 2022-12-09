@@ -14,7 +14,7 @@
   "author": "manlaig",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "nodemon": "^1.17.2",
     "socket.io": "^2.0.4"
   }
